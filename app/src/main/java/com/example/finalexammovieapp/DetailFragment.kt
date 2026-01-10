@@ -23,7 +23,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.tvDetailTitle.text = title
         binding.tvDetailGenre.text = movie.genre?.joinToString(", ") ?: "Animation, Classic"
 
-        // Smart Plot Logic
         val plotText = if (movie.plot == null || movie.plot.length < 50) {
             "This is one of the most celebrated animated movies of its time. " +
                     "Featuring ground-breaking visuals and a heartwarming story, it captured the hearts of audiences worldwide."
@@ -32,13 +31,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
         binding.tvDetailPlot.text = plotText
 
-        // Load Image
         Glide.with(this)
             .load(movie.poster)
             .placeholder(android.R.drawable.ic_menu_gallery)
             .into(binding.ivDetailPoster)
 
-        // --- NEW FEATURE 1: SHARE BUTTON ---
         binding.btnShare.setOnClickListener {
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
@@ -48,9 +45,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             startActivity(Intent.createChooser(shareIntent, "Share via"))
         }
 
-        // --- NEW FEATURE 2: BROWSER BUTTON ---
         binding.btnBrowser.setOnClickListener {
-            // Open Google Search with the movie title
             val url = "https://www.google.com/search?q=$title movie"
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(browserIntent)

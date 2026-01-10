@@ -24,11 +24,9 @@ class MovieAdapter(
         with(holder.binding) {
             tvTitle.text = movie.title ?: "Unknown Movie"
 
-            // Randomize Year just for display if missing
             val displayYear = if (movie.year == 0 || movie.year == 2024) Random.nextInt(1990, 2023) else movie.year
             tvYear.text = displayYear.toString()
 
-            // UPDATED: Just display the rating we saved in ListFragment
             tvRating.text = "Rating: ${movie.rating}"
 
             Glide.with(root.context)

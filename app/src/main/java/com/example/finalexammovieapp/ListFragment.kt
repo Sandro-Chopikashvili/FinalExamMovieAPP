@@ -20,7 +20,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     private var allMovies: List<Movie> = emptyList()
 
-    // Track sort states
     private var isNameAscending = true
     private var isRatingHighToLow = true
 
@@ -44,7 +43,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     private fun setupButtons() {
-        // 1. NAME SORT
         binding.btnSortName.setOnClickListener {
             isNameAscending = !isNameAscending
 
@@ -55,7 +53,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                 binding.btnSortName.text = "Sort Name (Z-A)"
                 allMovies.sortedByDescending { it.title }
             }
-            // Important: update the master list sequence so subsequent filters work
             allMovies = sorted
             adapter.updateData(sorted)
         }
@@ -104,7 +101,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             try {
                 val movies = RetrofitClient.instance.getMovies()
 
-                // CRITICAL FIX: Assign random ratings HERE, once and for all.
                 movies.forEach { movie ->
                     // Generate a random rating between 7.0 and 9.9
                     val randomRating = (70..99).random() / 10.0

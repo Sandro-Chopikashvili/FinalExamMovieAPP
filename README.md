@@ -2,7 +2,7 @@
 
 
 
-`package com.example.finalexammovieapp
+```package com.example.finalexammovieapp
 
 import android.content.Intent
 import android.net.Uri
@@ -72,4 +72,4 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             startActivity(browserIntent)
         }
     }
-}`
+}```

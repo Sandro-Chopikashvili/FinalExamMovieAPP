@@ -18,7 +18,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val binding = FragmentDetailBinding.bind(view)
         val movie = args.movieData
 
-        // Set Text Data
         val title = movie.title ?: "Unknown Title"
         binding.tvDetailTitle.text = title
         binding.tvDetailGenre.text = movie.genre?.joinToString(", ") ?: "Animation, Classic"

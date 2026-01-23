@@ -10,25 +10,30 @@
 
 
 
-ListFragment.kt:
+## ListFragment.kt – ძირითადი ფუნქციონალი
 
-•	იყენებს RetrofitClient, რათა წამოიღოს მონაცემები ინტერნეტიდან
+`ListFragment` პასუხისმგებელია ფილმების სიის ჩატვირთვაზე, ჩვენებაზე და მარტივ ფილტრაცია/სორტირებაზე.
 
-•	თუ ინტერნეტი გაითიშება იყენებს "Backup Data", რათა აპლიკაცია არ გაიქრაშოს
+### ძირითადი მახასიათებლები
 
-•	იყენებს RecyclerView და აკავშირებს MovieAdapter, რათა გამოსახოს ფილმები ეკრანზე
+- **მონაცემთა წყარო**  
+  იყენებს **RetrofitClient**-ს API-დან ფილმების წამოსაღებად
 
-  ღილაკები:
-  
-  სორტირება 
+- **Offline რეჟიმი**  
+  თუ ინტერნეტი გათიშულია, იყენებს **"Backup Data"**-ს → აპლიკაცია არ კრაშდება
 
+- **UI**  
+  - **RecyclerView** + **MovieAdapter** ფილმების სიის გამოსახულად  
+  - ძებნა (**SearchView**)  
+  - სორტირების ღილაკები (სახელითა და რეიტინგით)
+
+### სორტირების ლოგიკა
 
 ```kotlin
 private fun setupButtons() {
-   
+    // სორტირება სახელით (A-Z / Z-A)
     binding.btnSortName.setOnClickListener {
         isNameAscending = !isNameAscending
-
         val sorted = if (isNameAscending) {
             binding.btnSortName.text = "Sort Name (A-Z)"
             allMovies.sortedBy { it.title }
@@ -40,10 +45,9 @@ private fun setupButtons() {
         adapter.updateData(sorted)
     }
 
-   
+    // სორტირება რეიტინგით (მაღალი → დაბალი / დაბალი → მაღალი)
     binding.btnSortRating.setOnClickListener {
         isRatingHighToLow = !isRatingHighToLow
-
         val sorted = if (isRatingHighToLow) {
             binding.btnSortRating.text = "Sort Rating (High)"
             allMovies.sortedByDescending { it.rating ?: 0.0 }
@@ -55,19 +59,3 @@ private fun setupButtons() {
         adapter.updateData(sorted)
     }
 }```
-
-
-Search
-
-```kotlin
-    private fun setupSearch() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean = false
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                filterList(newText)
-                return true
-            }
-        })
-    }
-

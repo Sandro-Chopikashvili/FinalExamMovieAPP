@@ -60,3 +60,18 @@ private fun setupButtons() {
     }
 }
 ```
+
+  ### ძებნის ლოგიკა
+
+  ```kotlin
+    private fun setupSearch() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+        })
+    }
+  ```

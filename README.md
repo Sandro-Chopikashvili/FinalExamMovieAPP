@@ -156,13 +156,16 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
    - სათაური: tvTitle.text = movie.title (ანიჭებს ფილმის სახელს).
    - წელი (Random Logic) კოდში წერია ლოგიკა: თუ წელი არასწორია (0) ან არის 2027, ის ირჩევს შემთხვევით წელს 1990-დან 2026-მდე, რათა სია უფრო მრავალფეროვანი გამოჩნდეს.
    - რეიტინგი: tvRating.text - აჩვენებს იმ რეიტინგს, რომელიც ListFragment-ში მივანიჭეთ.
+     
    - სურათი (Glide):
+     
      ```kotlin
      Glide.with(root.context)
     .load(movie.poster) // ტვირთავს ფოტოს ლინკიდან
     .into(ivMoviePoster) // სვამს სურათს ImageView-ში
      ```
-    - დაკლიკება: root.setOnClickListener { onClick(movie) } — როცა ფილმს დააჭერ, ის ატყობინებს ListFragment-ს, რომელ ფილმზე მოხდა დაჭერა.
+     
+    დაკლიკება: root.setOnClickListener { onClick(movie) } — როცა ფილმს დააჭერ, ის ატყობინებს ListFragment-ს, რომელ ფილმზე მოხდა დაჭერა.
 
 ```kotlin
 class MovieAdapter(

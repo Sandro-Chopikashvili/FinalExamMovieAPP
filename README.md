@@ -6,17 +6,23 @@
 
 
 
+
+
+
+
 ListFragment.kt:
+
 •	იყენებს RetrofitClient, რათა წამოიღოს მონაცემები ინტერნეტიდან
 •	თუ ინტერნეტი გაითიშება იყენებს "Backup Data", რათა აპლიკაცია არ გაიქრაშოს
 •	იყენებს RecyclerView და აკავშირებს MovieAdapter, რათა გამოსახოს ფილმები ეკრანზე
+
   ღილაკები:
     სორტირება: 
 
 
 ```kotlin
 private fun setupButtons() {
-    // Name Sort Logic
+   
     binding.btnSortName.setOnClickListener {
         isNameAscending = !isNameAscending
 
@@ -31,7 +37,7 @@ private fun setupButtons() {
         adapter.updateData(sorted)
     }
 
-    // Rating Sort Logic
+   
     binding.btnSortRating.setOnClickListener {
         isRatingHighToLow = !isRatingHighToLow
 

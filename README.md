@@ -14,8 +14,8 @@ ListFragment.kt:
     სორტირება: 
 
 
-    
-    ```    private fun setupButtons() {
+    ```kotlin
+             private fun setupButtons() {
         binding.btnSortName.setOnClickListener {
             isNameAscending = !isNameAscending
 

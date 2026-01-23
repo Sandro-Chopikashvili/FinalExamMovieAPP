@@ -140,10 +140,69 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
 ## MovieAdapter.kt - ძირითადი ფუნქციონალი
 
-1. კლასის პარამეტრები (Constructor)
+1. *კლასის პარამეტრები (Constructor)*
    ```kotlin
    private var movies: List<Movie>,
    private val onClick: (Movie) -> Unit
    ```
 - *movies:* ეს არის მონაცემების სია, რომელიც ადაპტერმა უნდა გამოაჩინოს.
 - *onClick:* ეს არის ფუნქცია, რომელიც გამოიძახება მაშინ, როდესაც მომხმარებელი კონკრეტულ ფილმს დააჭერს
+
+2. *onCreateViewHolder*
+   - ეს ფუნქცია ეშვება მაშინ, როდესაც ეკრანს სჭირდება ახალი ელემენტის შექმნა.
+
+3. *onBindViewHolder*
+   ეს ფუნქცია ეშვება თითოეული ფილმისთვის. ის აკავშირებს კონკრეტულ მონაცემებს ვიზუალურ ელემენტებთან:
+   - სათაური: tvTitle.text = movie.title (ანიჭებს ფილმის სახელს).
+   - წელი (Random Logic) კოდში წერია ლოგიკა: თუ წელი არასწორია (0) ან არის 2027, ის ირჩევს შემთხვევით წელს 1990-დან 2026-მდე, რათა სია უფრო მრავალფეროვანი გამოჩნდეს.
+   - რეიტინგი: tvRating.text - აჩვენებს იმ რეიტინგს, რომელიც ListFragment-ში მივანიჭეთ.
+   - სურათი (Glide):
+     ```kotlin
+     Glide.with(root.context)
+    .load(movie.poster) // ტვირთავს ფოტოს ლინკიდან
+    .into(ivMoviePoster) // სვამს სურათს ImageView-ში
+     ```
+    - დაკლიკება: root.setOnClickListener { onClick(movie) } — როცა ფილმს დააჭერ, ის ატყობინებს ListFragment-ს, რომელ ფილმზე მოხდა დაჭერა.
+
+```kotlin
+class MovieAdapter(
+    private var movies: List<Movie>,
+    private val onClick: (Movie) -> Unit
+) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+
+    inner class MovieViewHolder(val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+        val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MovieViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        val movie = movies[position]
+        with(holder.binding) {
+            tvTitle.text = movie.title ?: "Unknown Movie"
+
+            val displayYear = if (movie.year == 0 || movie.year == 2027) Random.nextInt(1990, 2026) else movie.year
+            tvYear.text = displayYear.toString()
+
+            tvRating.text = "Rating: ${movie.rating}"
+
+            Glide.with(root.context)
+                .load(movie.poster)
+                .centerCrop()
+                .placeholder(android.R.drawable.ic_menu_gallery)
+                .into(ivMoviePoster)
+
+            root.setOnClickListener { onClick(movie) }
+        }
+    }
+
+    override fun getItemCount() = movies.size
+
+    fun updateData(newMovies: List<Movie>) {
+        movies = newMovies
+        notifyDataSetChanged()
+    }
+}
+```
+   

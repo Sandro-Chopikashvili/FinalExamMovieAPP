@@ -14,7 +14,9 @@ ListFragment.kt:
     სორტირება: 
 
 
+```kotlin
 private fun setupButtons() {
+    // Name Sort Logic
     binding.btnSortName.setOnClickListener {
         isNameAscending = !isNameAscending
 
@@ -25,11 +27,11 @@ private fun setupButtons() {
             binding.btnSortName.text = "Sort Name (Z-A)"
             allMovies.sortedByDescending { it.title }
         }
-
         allMovies = sorted
         adapter.updateData(sorted)
     }
 
+    // Rating Sort Logic
     binding.btnSortRating.setOnClickListener {
         isRatingHighToLow = !isRatingHighToLow
 
@@ -40,7 +42,6 @@ private fun setupButtons() {
             binding.btnSortRating.text = "Sort Rating (Low)"
             allMovies.sortedBy { it.rating ?: 0.0 }
         }
-
         allMovies = sorted
         adapter.updateData(sorted)
     }

@@ -54,7 +54,7 @@ private fun setupButtons() {
         allMovies = sorted
         adapter.updateData(sorted)
     }
-}
+}```
 
 
 Search

@@ -137,3 +137,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 }
 ```
 
+
+## MovieAdapter.kt - ძირითადი ფუნქციონალი
+
+1. კლასის პარამეტრები (Constructor)
+   ```kotlin
+   private var movies: List<Movie>,
+   private val onClick: (Movie) -> Unit
+   ```

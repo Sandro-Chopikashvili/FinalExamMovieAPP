@@ -19,6 +19,7 @@ ListFragment.kt:
 •	იყენებს RecyclerView და აკავშირებს MovieAdapter, რათა გამოსახოს ფილმები ეკრანზე
 
   ღილაკები:
+  
     სორტირება: 
 
 

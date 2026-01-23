@@ -18,46 +18,7 @@
 
 - **მონაცემთა წყარო**  
   იყენებს **RetrofitClient**-ს API-დან ფილმების წამოსაღებად
-  ```kotlin
-      private fun fetchMovies() {
-        lifecycleScope.launch {
-            try {
-                val movies = RetrofitClient.instance.getMovies()
-
-                movies.forEach { movie ->
-                    // Generate a random rating between 7.0 and 9.9
-                    val randomRating = (70..99).random() / 10.0
-                    movie.rating = randomRating
-                }
-
-                allMovies = movies
-
-                if (movies.isNotEmpty()) {
-                    adapter.updateData(movies)
-                } else {
-                    Toast.makeText(context, "API returned empty list", Toast.LENGTH_SHORT).show()
-                }
-                binding.progressBar.visibility = View.GONE
-
-            } catch (e: Exception) {
-                Log.e("ListFragment", "Network Error: ${e.message}")
-                Toast.makeText(context, "Network Error! Loading Backup Data...", Toast.LENGTH_LONG).show()
-
-                val backupData = listOf(
-                    Movie(1, "Test Movie (Offline)", "https://via.placeholder.com/150", 2024, listOf("Action", "Demo"), 9.9, "Offline Mode Active."),
-                    Movie(2, "Second Movie", "https://via.placeholder.com/150", 2023, listOf("Comedy"), 8.5, "RecyclerView is working."),
-                    Movie(3, "Another One", "https://via.placeholder.com/150", 2022, listOf("Drama"), 7.5, "More data for sorting.")
-                )
-                allMovies = backupData
-                adapter.updateData(backupData)
-                binding.progressBar.visibility = View.GONE
-            }
-        }
-    }
-}
-    ```
-
-
+  
 - **Offline რეჟიმი**  
   თუ ინტერნეტი გათიშულია, იყენებს **"Backup Data"**-ს → აპლიკაცია არ კრაშდება
 
@@ -65,6 +26,11 @@
   - **RecyclerView** + **MovieAdapter** ფილმების სიის გამოსახულად  
   - ძებნა (**SearchView**)  
   - სორტირების ღილაკები (სახელითა და რეიტინგით)
+    
+- **Navigation**
+  ნავიგაცია: როდესაც ფილმს აჭერთ, ის მიმართავს Navigation კომპონენტს, რომ გადავიდეს DetailFragment-ზე და თან ატანს კონკრეტულ Movie ობიექტს.
+
+  
 
 ### სორტირების ლოგიკა
 

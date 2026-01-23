@@ -159,11 +159,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
      
    - სურათი (Glide):
      
-     ```kotlin
+```kotlin
      Glide.with(root.context)
     .load(movie.poster) // ტვირთავს ფოტოს ლინკიდან
     .into(ivMoviePoster) // სვამს სურათს ImageView-ში
-        ```
+```
      
     *დაკლიკება: root.setOnClickListener { onClick(movie) } — როცა ფილმს დააჭერ, ის ატყობინებს ListFragment-ს, რომელ ფილმზე მოხდა დაჭერა.*
 

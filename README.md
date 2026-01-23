@@ -82,6 +82,9 @@ private fun setupButtons() {
   ```
 
 
+
+
+
 ## DetailFragment.kt - ძირითადი ფუნქციონალი
 
 - მონაცემთა დამუშავება: იღებს Movie ობიექტს Navigation Arguments-ის საშუალებით.

@@ -145,3 +145,5 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
    private var movies: List<Movie>,
    private val onClick: (Movie) -> Unit
    ```
+- *movies:* ეს არის მონაცემების სია, რომელიც ადაპტერმა უნდა გამოაჩინოს.
+- *onClick:* ეს არის ფუნქცია, რომელიც გამოიძახება მაშინ, როდესაც მომხმარებელი კონკრეტულ ფილმს დააჭერს

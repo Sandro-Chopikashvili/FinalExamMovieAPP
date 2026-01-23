@@ -15,7 +15,7 @@ ListFragment.kt:
 
 
     
-    kotlin```    private fun setupButtons() {
+    ```    private fun setupButtons() {
         binding.btnSortName.setOnClickListener {
             isNameAscending = !isNameAscending
 
@@ -43,5 +43,5 @@ ListFragment.kt:
             allMovies = sorted
             adapter.updateData(sorted)
         }
-    }
+    }```
 
